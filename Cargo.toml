@@ -1,0 +1,42 @@
+[package]
+name = "zero2prod"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "zero2prod"
+
+[dependencies]
+actix-web = "4"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+serde ={version="1", features=["derive"]}
+config="0.13"
+uuid={ version="1", features=["v4"] }
+chrono={ version="0.4", default-features=false, features=["clock"] }
+tracing={ version="0.1", features=["log"] }
+tracing-subscriber = {version = "0.3", features = ["registry", "env-filter"]}
+tracing-bunyan-formatter = "0.3"
+tracing-log="0.1"
+once_cell="1"
+
+[dependencies.sqlx]
+version ="0.6"
+default-features=false
+features =[
+    "runtime-tokio-rustls", #uses tokio futures and uses rustls for tls
+    "macros", #provides the sqlx::query! and sqlx::query_as! macro
+    "postgres", #unlocks non-standard postgres types
+    "offline", #supports offline compilation
+    "chrono", #adds support for mapping timestamptz to DateTime<T> from chrono create
+    "uuid", #support for mapping SQL UUID to Uuid type from uuid crate
+    "migrate" #gives access to the same functions as sqlx-cli to manage migrations. Useful in testing````````````````
+]
+
+[dev-dependencies]
+reqwest = "0.11.13"

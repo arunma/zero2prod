@@ -81,3 +81,32 @@ Bunyan formatter
 cargo install bunyan
 TEST_LOG=true cargo test | bunyan
 ```
+
+
+
+Disable inline hints
+
+```
+{
+  "editor.inlayHints.enabled": "offUnlessPressed"
+}
+```
+Then you can toggle them with `Ctrl + Alt` pressed.
+
+
+**Sqlx offline mode**
+
+```
+cargo sqlx prepare -- --lib 
+
+```
+
+Docker entry
+
+```
+ENV SQLX_OFFLINE=true
+```
+
+```
+docker build -t zero2prod .   
+```
